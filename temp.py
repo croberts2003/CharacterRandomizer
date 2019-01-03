@@ -30,7 +30,7 @@ def clear():
 
 # class storing body aspects
 class char_body:
-    def body_mixer (self):
+    def height_mixer (self):
         randheight = random.randint(58,80)
         inches = randheight % 12
         sub = randheight - inches
@@ -39,8 +39,9 @@ class char_body:
         feet = int(feet)
         inches = int(inches)
 
-        finalheight = (str(feet) + "' " + str(inches))
+        finalheight = (str(feet) + "' " + str(inches) + "\" ")
         return finalheight
+    
 
 # class storing character backstory
 class char_backstory:
@@ -128,7 +129,7 @@ def gettraits():
 
 def getbody():
     x = char_body()
-    finalweight = x.body_mixer()
+    finalweight = x.height_mixer()
 
     print(finalweight)
 
