@@ -30,9 +30,14 @@ def clear():
 
 # class storing body aspects
 class char_body:
+    def __init__ (self, gender):
+        self.gender = gender
     def gender_mixer (self):
-        gender_array = ["Male", "Female"]
-        final_gender = random.choice(list(gender_array))
+        num = random.randint(1,2)
+        if num == 2:
+            final_gender = "Male"
+        elif num == 1:
+            final_gender = "Female"
 
         return final_gender
         
@@ -43,12 +48,21 @@ class char_body:
         
     def weight_mixer (self, height):
         # add if statement to dictate a diff ratio between weight and height for women
-        randweight = random.randint(180.0, 200.0)
-        averageweight = height * 2.3
-        non_averaged_weight = averageweight + randweight
-        finalweight = non_averaged_weight / 2
+        if self.gender == "Male":
+            randweight = random.randint(150.0, 250.0)
+            averageweight = height * 2.3
+            non_averaged_weight = averageweight + randweight
+            finalweight = non_averaged_weight / 2
 
-        return finalweight
+            return finalweight
+
+        if self.gender == "Female":
+            randweight = random.randint(100.0, 180.0)
+            averageweight = height * 2.3
+            non_averaged_weight = averageweight + randweight
+            finalweight = non_averaged_weight / 2
+
+            return finalweight
 
 # class storing character backstory
 class char_backstory:
@@ -135,13 +149,23 @@ def gettraits():
     print(randomized_traits)
 
 def getbody():
-    x = char_body()
+    # get gender
+    f = "filler"
+
+    x = char_body(f)
+
+    final_gender = x.gender_mixer()
+
+    char_body(final_gender)
+
+    x = char_body(final_gender)
 
     # get random height
     randheight = x.height_mixer()
 
     # get random weight
     final_weight = x.weight_mixer(randheight)
+    final_weight = int(final_weight)
 
     # translate height
     sub = randheight 
@@ -154,15 +178,14 @@ def getbody():
 
     final_height = (str(feet) + "' " + str(inches) + "\"")
 
-    final_gender = x.gender_mixer()
-
-    print(final_height)
-    print(final_weight)
     print(final_gender)
+    print(final_height)
+    print(str(final_weight) + " lbs.")
+
 # Called Functions
 
 getname()
 
-gettraits()
-
 getbody()
+
+gettraits() 
